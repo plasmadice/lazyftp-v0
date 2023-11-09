@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "pnpm test:basic",
+    "test:basic": "dotenv -e .env.local k6 run tests/basic.js",
+    "test:session": "dotenv -e .env.local k6 run tests/session.js",
+    "test:all": "dotenv -e .env.local k6 run tests/index.js"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.0.3",
@@ -28,10 +32,13 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/k6": "^0.47.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "dotenv": "link:k6/x/dotenv",
+    "dotenv-cli": "^7.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
     "postcss": "^8",

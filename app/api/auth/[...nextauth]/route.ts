@@ -1,8 +1,15 @@
 import NextAuth, { type NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
+import DiscordProvider from "next-auth/providers/discord"
 import Cryptr from "cryptr"
 import { Server } from "@/types"
+
+// Potential idea:
+// Each provider routes to a different pool for each user
+// feature ??
+
+const scopes = ["identify", "email"].join(" ")
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -66,8 +73,15 @@ export const authOptions: NextAuthOptions = {
         params: {
           prompt: "consent",
           access_type: "offline",
-          response_type: "code"
-        }
+          response_type: "code",
+        },
+      },
+    }),
+    DiscordProvider({
+      clientId: String(process.env.DISCORD_CLIENT_ID),
+      clientSecret: String(process.env.DISCORD_CLIENT_SECRET),
+      authorization: {
+        params: { scope: scopes }
       }
     }),
   ],
@@ -77,6 +91,15 @@ export const authOptions: NextAuthOptions = {
   // },
   callbacks: {
     async signIn({ user, account, profile }: any) {
+      /* Auth values */
+      // Discord: profile.verified: bool
+      // Google profile.email_verified: bool
+      // Both: profile.id: string, unique? 
+
+      // console.log({ user, account, profile })
+
+      // Check db for
+
       // if (account.provider === "discord") {
 
       //   // Grant access only if the member has the required role

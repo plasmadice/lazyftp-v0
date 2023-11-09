@@ -17,9 +17,9 @@ export function LoginForm() {
     >
       <div className="flex flex-col w-full max-w-lg mx-12 px-8 py-12 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-10 md:px-12 lg:px-14 md:space-x-8">
         <div className="flex flex-col justify-between space-y-6 mb-8 md:mb-0">
-          <div className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white whitespace-nowrap">
+          <h1 className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white whitespace-nowrap">
             View Your Accounts
-          </div>
+          </h1>
           <Providers />
           <Link className="text-blue-500 hover:underline whitespace-nowrap" href="/demo">
             Continue without logging in
