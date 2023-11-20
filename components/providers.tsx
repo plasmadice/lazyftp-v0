@@ -10,11 +10,18 @@ export function Providers() {
       <Button
         className="w-full whitespace-nowrap bg-red-500 text-white"
         variant="outline"
-        onClick={() => signIn("google", { callbackUrl: "/demo" })}
+        onClick={() => signIn("google", { callbackUrl: "/" })}
       >
         Continue with Google
       </Button>
-      <Link href="/demo">
+      <Button
+        className="w-full whitespace-nowrap bg-[#5865F2] text-white"
+        variant="outline"
+        onClick={() => signIn("discord", { callbackUrl: "/" })}
+      >
+        Continue with Discord
+      </Button>
+      <Link href="/view">
         <Button
           className="w-full whitespace-nowrap bg-blue-600 text-white"
           variant="outline"

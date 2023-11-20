@@ -60,6 +60,10 @@ To start the production server, run:
 npm run start
 ```
 
+## Shoutouts
+
+[Envshare](https://envshare.dev/) - Inspiration for Redis usage and encoding/encryption
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

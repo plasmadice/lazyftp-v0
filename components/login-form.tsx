@@ -9,7 +9,7 @@ export function LoginForm() {
 
   return (
     <div
-      className="w-full h-screen flex items-center justify-center bg-cover bg-center"
+      className="w-full flex items-center justify-center bg-cover bg-center"
       style={{
         // recommended background: https://www.vantajs.com/?effect=net
         backgroundImage: '"url("/placeholder.svg?height=1080&width=1920")"',
@@ -21,7 +21,7 @@ export function LoginForm() {
             View Your Accounts
           </h1>
           <Providers />
-          <Link className="text-blue-500 hover:underline whitespace-nowrap" href="/demo">
+          <Link className="text-blue-500 hover:underline whitespace-nowrap" href="/view">
             Continue without logging in
           </Link>
         </div>

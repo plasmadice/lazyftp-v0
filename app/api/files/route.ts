@@ -1,3 +1,5 @@
+// NOT CURRENTLY WORKING
+
 import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth/next"
 import * as ftp from "basic-ftp"

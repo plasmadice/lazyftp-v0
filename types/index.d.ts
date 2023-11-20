@@ -24,6 +24,18 @@ export type Options = {
   password: string | undefined
 }
 
-export interface FTPSession extends Session {
-  server?: string
+// Before asking copilot
+// export interface FTPSession extends Session {
+//   server?: string
+// }
+
+export interface FTPSession {
+  id: string;
+  name?: string;
+  host: string;
+  username?: string;
+  password?: string;
+  port?: number;
+  secure?: boolean;
+  lastAccessed: number;
 }

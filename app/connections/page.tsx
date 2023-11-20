@@ -3,7 +3,7 @@ import { auth } from "@/util/auth"
 
 import { AddFTP } from "@/components/add-ftp"
 
-export async function Main() {
+export default async function page() {
   const session = await auth()
 
   console.log("Session in <Main> view", session)

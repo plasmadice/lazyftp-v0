@@ -1,71 +1,66 @@
 import NextAuth, { type NextAuthOptions } from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import DiscordProvider from "next-auth/providers/discord"
-import Cryptr from "cryptr"
-import { Server } from "@/types"
+import { UpstashRedisAdapter } from "@auth/upstash-redis-adapter"
+import { Redis } from "@upstash/redis";
 
-// Potential idea:
-// Each provider routes to a different pool for each user
-// feature ??
-
+const redis = Redis.fromEnv();
 const scopes = ["identify", "email"].join(" ")
 
 export const authOptions: NextAuthOptions = {
   session: {
-    strategy: "jwt",
-    maxAge: 60 * 30, // 30 minutes
+    strategy: "database",
   },
+  adapter: UpstashRedisAdapter(redis, { baseKeyPrefix: "lazyftp:" }),
   // Configure one or more authentication providers
   providers: [
-    CredentialsProvider({
-      id: "server",
-      name: "server credentials",
-      credentials: {
-        host: {
-          label: "Server",
-          type: "text",
-          placeholder: "ftp.example.com",
-        },
-        user: { label: "User", type: "text" },
-        password: { label: "Password", type: "password" },
-        port: { label: "Port", type: "number" },
-        passkey: {
-          label: "Passkey",
-          type: "password",
-          placeholder: "Admin key",
-        },
-      },
-      async authorize(credentials): Promise<any> {
-        const cryptr = new Cryptr(process.env.ENCRYPT_KEY as string)
+    // CredentialsProvider({
+    //   id: "server",
+    //   name: "server credentials",
+    //   credentials: {
+    //     host: {
+    //       label: "Server",
+    //       type: "text",
+    //       placeholder: "ftp.example.com",
+    //     },
+    //     user: { label: "User", type: "text" },
+    //     password: { label: "Password", type: "password" },
+    //     port: { label: "Port", type: "number" },
+    //     passkey: {
+    //       label: "Passkey",
+    //       type: "password",
+    //       placeholder: "Admin key",
+    //     },
+    //   },
+    //   async authorize(credentials): Promise<any> {
+    //     const cryptr = new Cryptr(process.env.ENCRYPT_KEY as string)
 
-        const isAdmin =
-          credentials?.passkey &&
-          credentials?.passkey?.includes(process.env.PASS_KEY as string)
-        const isAuthorized = isAdmin || credentials?.host
+    //     const isAdmin =
+    //       credentials?.passkey &&
+    //       credentials?.passkey?.includes(process.env.PASS_KEY as string)
+    //     const isAuthorized = isAdmin || credentials?.host
 
-        let server: Server = {
-          host: isAdmin ? String(process.env.FTP_HOST) : credentials?.host,
-          port: Number(credentials?.port) || 21,
-          user: isAdmin ? String(process.env.FTP_USER) : credentials?.user,
-          password: isAdmin
-            ? String(process.env.FTP_PASSWORD)
-            : credentials?.password,
-          passkey: credentials?.passkey,
-        }
+    //     let server: Server = {
+    //       host: isAdmin ? String(process.env.FTP_HOST) : credentials?.host,
+    //       port: Number(credentials?.port) || 21,
+    //       user: isAdmin ? String(process.env.FTP_USER) : credentials?.user,
+    //       password: isAdmin
+    //         ? String(process.env.FTP_PASSWORD)
+    //         : credentials?.password,
+    //       passkey: credentials?.passkey,
+    //     }
 
-        const user = {
-          id: credentials?.user || "server",
-          // server: credentials?.server,
-          server: cryptr.encrypt(JSON.stringify(server)),
-        }
+    //     const user = {
+    //       id: credentials?.user || "server",
+    //       // server: credentials?.server,
+    //       server: cryptr.encrypt(JSON.stringify(server)),
+    //     }
 
-        if (isAuthorized) {
-          return user
-        }
-      },
-    }),
-
+    //     if (isAuthorized) {
+    //       return user
+    //     }
+    //   },
+    // }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
@@ -89,6 +84,7 @@ export const authOptions: NextAuthOptions = {
   // pages: {
   //   signIn: "/"
   // },
+  
   callbacks: {
     async signIn({ user, account, profile }: any) {
       /* Auth values */
@@ -107,14 +103,20 @@ export const authOptions: NextAuthOptions = {
       // }
 
       // Allow sign-in for other providers
+
+      // console.log('user in signIn callback', user)
+      // console.log('account in signIn callback', account)
+      // console.log('profile in signIn callback', profile)
+      // console.log("Sign in successful")
       return true
     },
     async jwt({ token, user, account, profile }: any) {
       return token
     },
     async session({ session, user, token }: any) {
-      session.server = token.server
-
+      // console.log('session was checked', session)
+      // console.log('user in session callback', user)
+      session.user.id = user.id
       return session
     },
   },

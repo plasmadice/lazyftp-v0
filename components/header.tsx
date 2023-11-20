@@ -2,8 +2,8 @@ import Link from "next/link"
 
 export function Header() {
   return (
-    <header className="flex items-center justify-between px-4 py-2 border-b dark:border-zinc-800 bg-yellow-200">
-      <Link href="#">
+    <header className="flex items-center justify-between px-4 py-2 border-b dark:border-zinc-800 bg-base-100">
+      <Link href="/api/auth/signout">
         <svg
           className=" h-6 w-6"
           fill="none"
