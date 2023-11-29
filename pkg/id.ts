@@ -1,3 +1,4 @@
+"use server"
 import { toBase58 } from "../util/base58";
 import { ID_LENGTH } from "./constants";
 

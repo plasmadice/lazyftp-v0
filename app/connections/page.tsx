@@ -1,24 +1,30 @@
-import { FileView } from "@/components/file-view"
+import { Connections } from "@/components/connections"
 import { auth } from "@/util/auth"
-
-import { AddFTP } from "@/components/add-ftp"
+import type { Session } from "next-auth"
+import Link from "next/link"
+import MockFTP from "@/app/connections/ftp/MockFTP"
 
 export default async function page() {
-  const session = await auth()
+  const session: Session | null = await auth()
 
-  console.log("Session in <Main> view", session)
+  const data: any = []
 
-  if (session?.ftp) {
-    return (
-      <main className="flex-grow bg-base-100">
-        <FileView />
-      </main>
-    )
+  if (!session) {
+    return <p>No session</p>
   } else {
     return (
-      <main className="flex-grow place-self-center bg-base-100">
-        <AddFTP />
-      </main>
+      <>
+        <div className="text-base-content">
+          <p>Connections for {session.user.name} / {session.user.id}</p>
+          <p>FTP Connections</p>
+          <p>Current list of connections here</p>
+        </div>
+        <Link href="/connections/ftp" className="link link-secondary">
+          Add New FTP Connection
+        </Link>
+        <MockFTP userId={session.user.id} />
+        <Connections connections={data} />
+      </>
     )
   }
 }

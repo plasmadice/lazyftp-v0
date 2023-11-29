@@ -25,7 +25,6 @@ export default async function page() {
   const session: FTPSession | null = await getServerSession(authOptions)
 
   const data = await navigate(session?.server as string)
-  console.log("data", data)
 
   return (
     <div className="p-5">

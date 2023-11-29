@@ -114,8 +114,6 @@ export const authOptions: NextAuthOptions = {
       return token
     },
     async session({ session, user, token }: any) {
-      // console.log('session was checked', session)
-      // console.log('user in session callback', user)
       session.user.id = user.id
       return session
     },

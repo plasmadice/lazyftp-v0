@@ -2,10 +2,10 @@ import Link from "next/link"
 
 export function Header() {
   return (
-    <header className="flex items-center justify-between px-4 py-2 border-b dark:border-zinc-800 bg-base-100">
+    <header className="flex items-center justify-between px-4 py-2 border-b border-base-300 bg-base-300">
       <Link href="/api/auth/signout">
         <svg
-          className=" h-6 w-6"
+          className="h-6 w-6"
           fill="none"
           height="24"
           stroke="currentColor"
@@ -21,7 +21,7 @@ export function Header() {
         <span className="sr-only">FTP Service</span>
       </Link>
       <Link
-        className="text-sm font-medium text-zinc-900 hover:text-zinc-700 dark:text-zinc-50 dark:hover:text-zinc-200"
+        className="text-sm font-medium text-base-content"
         href="/faq"
       >
         FAQ

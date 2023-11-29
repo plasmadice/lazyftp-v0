@@ -9,17 +9,17 @@ export function Footer() {
   return (
     <Collapsible
       defaultOpen
-      className="border-t dark:border-zinc-800 bg-base-100"
+      className="bg-base-300 text-base-content"
     >
       <CollapsibleTrigger asChild>
         <Button
-          className="w-full h-10 flex items-center justify-between px-4"
+          className="w-full h-6 flex justify-between px-4 border-none rounded-none bg-accent text-accent-content"
           size="icon"
           variant="outline"
         >
           <span>Transfers</span>
           <svg
-            className=" h-6 w-6"
+            className="h-6 w-6"
             fill="none"
             height="24"
             stroke="currentColor"

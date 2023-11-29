@@ -1,18 +1,37 @@
+"use server"
+
 import { Redis } from "@upstash/redis";
-import { FTPSession } from '@/types/index';
+import { Connection } from '@/types/index';
+import { userKeyPrefix } from "@/util/keys";
+import { encrypt, decrypt } from "@/pkg/encryption";
+import { toBase58 } from "@/util/base58";
 
-// prefix key with envshare
-const baseKeyPrefix = "lazyftp";
+const redis = Redis.fromEnv()
 
-export const setFTP = async (client: Redis, userId: string, ftp: FTPSession) => {
-  console.log("setFTP running", userId, ftp)
-  const ftpId = crypto.randomUUID()
-  ftp.id = ftpId;
-  const key = [baseKeyPrefix, userId].join(":");
+export const setFTP = async (userId: string, ftp: Connection) => {
 
-  // TODO: Encrypt
-  await client.hset(`${key}:${ftpId}`, { ftp });
+  // encrypt data before sending to redis
+  const { encrypted, key, iv } = await encrypt(JSON.stringify(ftp));
+
+  const userFTPKey = userKeyPrefix + userId + ':ftp:' + toBase58(key)
+  
+  // save encrypted ftp data to redis
+  await redis.hset(userFTPKey, { encrypted, iv }) // lazyftp:user:d492353a-efb7-49c3-8652-ec3907082283:ftp:VqxyceFx9WYP1at5ekPsGt
 }
+
+// export const getFTP = async (userId: string, ftpId: string): Connection => {
+//   const userFTPId = userKeyPrefix + userId + ':ftp:' + ftpId; 
+
+//   // const tx = redis.multi()
+//   redis.hgetall(ftpPrefix + ftpId);
+
+//   const { encrypted, iv } = await tx.exec<any>();
+//   // decrypt data
+
+//   const ftp = JSON.parse(await decrypt(encrypted, key, iv));
+
+//   return ftp;
+// }
 
 // export const getFTPList = async (client: Redis, userId: string) => {
 //   const ftpIds = await client.smembers('connections:' + userId);

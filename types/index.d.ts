@@ -1,5 +1,3 @@
-import type { User, Session } from 'next-auth'
-
 export type Payload = {
   host: string
   user: string
@@ -24,18 +22,25 @@ export type Options = {
   password: string | undefined
 }
 
-// Before asking copilot
-// export interface FTPSession extends Session {
-//   server?: string
-// }
 
-export interface FTPSession {
-  id: string;
-  name?: string;
-  host: string;
-  username?: string;
-  password?: string;
-  port?: number;
-  secure?: boolean;
-  lastAccessed: number;
+export type Connection = {
+  id?: string
+  name?: string
+  host?: string
+  username?: string
+  password?: string
+  port?: number
+  secure?: boolean
+  lastAccessed: number
+  createdAt: number
+  history?: HistoryEvent[]
+}
+
+export type HistoryEvent = {
+  id: string
+  userId: string
+  timestamp: number
+  command: string
+  args: string[]
+  path: string
 }

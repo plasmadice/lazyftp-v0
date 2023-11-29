@@ -1,3 +1,5 @@
+"use server"
+
 import { fromBase58 } from "../util/base58";
 
 export async function generateKey() {
@@ -11,6 +13,9 @@ export async function generateKey() {
   );
 }
 
+/** Encrypts the given text.
+ * @returns The encrypted data, encoded in base58.
+ * */
 export async function encrypt(text: string): Promise<{ encrypted: Uint8Array; iv: Uint8Array; key: Uint8Array }> {
   const key = await generateKey();
 
@@ -33,8 +38,14 @@ export async function encrypt(text: string): Promise<{ encrypted: Uint8Array; iv
   };
 }
 
-export async function decrypt(encrypted: string, keyData: Uint8Array, iv: string, keyVersion: number): Promise<string> {
-  const algorithm = keyVersion === 1 ? "AES-CBC" : "AES-GCM";
+/** Decrypts data encrypted with the `encrypt` function.
+ * @param encrypted The encrypted data, encoded in base58.
+ * @param keyData The key, encoded in base58.
+ * @param iv The initialization vector, encoded in base58.
+ * @returns The decrypted data.
+ * */
+export async function decrypt(encrypted: string, keyData: Uint8Array, iv: string): Promise<string> {
+  const algorithm = "AES-GCM";
 
   const key = await crypto.subtle.importKey("raw", keyData, { name: algorithm, length: 128 }, false, ["decrypt"]);
 

@@ -1,24 +1,27 @@
 import { FileView } from "@/components/file-view"
 import { auth } from "@/util/auth"
-
-import { AddFTP } from "@/components/add-ftp"
+import type { Session } from "next-auth"
+import Link from "next/link"
 
 export async function Main() {
-  const session = await auth()
+  const session: Session | null = await auth()
 
-  console.log("Session in <Main> view", session)
-
-  if (session?.ftp) {
+  if (session) {
     return (
-      <main className="flex-grow bg-base-100">
-        <FileView />
-      </main>
+      <>
+        <p>Logged in</p>
+        <p>User: {session.user.name}</p>
+        <p>ID: {session.user.id}</p>
+        <Link href="/connections" className="link link-secondary">
+          Connections
+        </Link>
+      </>
     )
   } else {
     return (
-      <main className="flex-grow place-self-center bg-base-100">
-        <AddFTP />
-      </main>
+      <>
+        <p>Not logged in</p>
+      </>
     )
   }
 }
