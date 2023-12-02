@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button"
 import type { Connection } from "@/types"
 
 export function ConnectionItem({ connection }: { connection: Connection }) {
-  const { name, createdAt, lastAccessed, history } = connection
+  // const { name, createdAt, lastAccessed, history } = connection
+  const history = [{ path: "/path/to/loot" }]
   
   const latestPath = history ? history[0].path : "/path/to/loot"
 
@@ -21,7 +22,7 @@ export function ConnectionItem({ connection }: { connection: Connection }) {
           </div>
           <div className="text-sm text-zinc-500 dark:text-zinc-400 truncate">
             Last accessed: September 10, 2023, Last connected path:
-            { latestPath + "cake" }
+            { latestPath }
           </div>
         </div>
       </div>
@@ -37,13 +38,7 @@ export function ConnectionItem({ connection }: { connection: Connection }) {
   )
 }
 
-export function Connections( { connections }: { connections: Connection[] }) {
-
-  if (connections && connections.length) {
-    console.log(`Connections in connections.tsx: ${connections.length}`)
-  } else {
-    console.log(`No connections in connections.tsx`)
-  }
+export function Connections({ keys } : { keys: string[] }) {
 
   return (
     <div className="flex flex-col pt-4 text-base-content">
@@ -53,28 +48,7 @@ export function Connections( { connections }: { connections: Connection[] }) {
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-4 py-2 border-b last:border-b-0">
-            <div className="flex justify-between items-start">
-              <div>
-                <div className="font-medium truncate">Server 1</div>
-                <div className="flex flex-col gap-2">
-                  <div className="text-sm text-zinc-600 dark:text-zinc-500 truncate">
-                    Created at: August 10, 2023
-                  </div>
-                  <div className="text-sm text-zinc-500 dark:text-zinc-400 truncate">
-                    Last accessed: September 10, 2023, Last connected path:
-                    /path/to/loot
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <Button size="sm" variant="outline">
-                  Reconnect
-                </Button>
-                <Button size="sm" variant="outline">
-                  Reconnect at previous location
-                </Button>
-              </div>
-            </div>
+            {/* <ConnectionItem connection={connections[0]} /> */}
           </div>
           <div className="flex flex-col gap-4 py-2 border-b last:border-b-0">
             <div className="flex justify-between items-start">

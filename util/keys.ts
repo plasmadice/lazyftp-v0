@@ -12,7 +12,4 @@ const userKeyPrefix = baseKeyPrefix + defaultOptions.userKeyPrefix
 const verificationTokenKeyPrefix =
   baseKeyPrefix + defaultOptions.verificationTokenKeyPrefix
 
-const baseConnectionsKeyPrefix = ':connections:'
-const ftpKeyPrefix = baseConnectionsKeyPrefix + 'ftp:'
-
-export { accountKeyPrefix, accountByUserIdPrefix, emailKeyPrefix, sessionKeyPrefix, sessionByUserIdKeyPrefix, userKeyPrefix, verificationTokenKeyPrefix, ftpKeyPrefix }
+export { baseKeyPrefix, accountKeyPrefix, accountByUserIdPrefix, emailKeyPrefix, sessionKeyPrefix, sessionByUserIdKeyPrefix, userKeyPrefix, verificationTokenKeyPrefix }

@@ -15,9 +15,9 @@ export function Aside() {
         >
           <CollapsibleTrigger asChild>
             <Button
-              className="w-full h-10 flex items-center justify-between px-4 first:rounded-none border-b border-accent"
-              size="icon"
+              className="w-full h-10 flex items-center justify-between px-4 rounded-none border-accent"
               variant="outline"
+              size="icon"
             >
               <span className="font-semibold">History 1</span>
               <svg
@@ -50,7 +50,7 @@ export function Aside() {
         <Collapsible defaultOpen>
           <CollapsibleTrigger asChild>
             <Button
-              className="w-full h-10 flex items-center justify-between px-4 first:rounded-t-none border-base-300 border-b-accent"
+              className="w-full h-10 flex items-center justify-between px-4 rounded-none border-accent"
               size="icon"
               variant="outline"
             >

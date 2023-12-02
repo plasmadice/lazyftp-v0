@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Redis } from "@upstash/redis"
-import { userKeyPrefix, ftpKeyPrefix } from "@/util/keys"
 import { auth } from "@/util/auth"
 
 type Request = {

@@ -6,8 +6,11 @@ import MockFTP from "@/app/connections/ftp/MockFTP"
 
 export default async function page() {
   const session: Session | null = await auth()
+  console.log('userId in connections/page.tsx', session?.user?.id)
 
-  const data: any = []
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/connections/${session?.user?.id}`)
+
+  const { keys } = await res.json()
 
   if (!session) {
     return <p>No session</p>
@@ -23,7 +26,7 @@ export default async function page() {
           Add New FTP Connection
         </Link>
         <MockFTP userId={session.user.id} />
-        <Connections connections={data} />
+        <Connections keys={keys} />
       </>
     )
   }

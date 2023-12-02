@@ -24,15 +24,16 @@ export type Options = {
 
 
 export type Connection = {
-  id?: string
+  id: string
+  lastAccessed: number
+  createdAt: number
+  type: string
   name?: string
   host?: string
   username?: string
   password?: string
   port?: number
   secure?: boolean
-  lastAccessed: number
-  createdAt: number
   history?: HistoryEvent[]
 }
 
