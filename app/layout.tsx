@@ -22,15 +22,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <section className="min-h-screen flex flex-col bg-accent">
+        <section className="min-h-screen max-h-screen flex flex-col bg-accent">
           <Header />
           <Collapsible
             defaultOpen
-            className="flex-grow flex overflow-auto min-h-full"
+            className="flex-grow flex overflow-hidden min-h-full"
           >
             <Aside />
 
-            <main className="flex-grow bg-base-100 rounded-bl-lg p-4">{children}</main>
+            <main className="flex-grow bg-base-100 rounded-bl-lg p-4 overflow-auto">{children}</main>
           </Collapsible>
           <Footer />
         </section>

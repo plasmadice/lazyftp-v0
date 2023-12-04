@@ -1,15 +1,14 @@
 "use client"
 import Link from "next/link"
 import { Connection } from '@/types'
-import { setFTP } from "@/util/db"
-import { generateId } from "@/pkg/id"
+import { setConnection } from "@/util/db"
 
-let mockConnection: Connection = {
+export let mockFTPConnection: Connection = {
   id: 'temp-id',
   lastAccessed: Date.now(),
   createdAt: Date.now(),
   type: "ftp",
-  name: "Mock FTP Connection 2",
+  name: "Mock FTP Connection",
   host: "test.rebex.net/",
   username: "demo",
   password: "password",
@@ -24,7 +23,12 @@ export default function MockFTP({ userId }: { userId: string }) {
     <Link
       href="#"
       className="link link-secondary ml-4"
-      onClick={() => setFTP(userId, mockConnection)}
+      onClick={() => {
+        const now = Date.now()
+        mockFTPConnection.createdAt = now
+        mockFTPConnection.lastAccessed = now
+        return setConnection(userId, mockFTPConnection)
+      }}
     >
       Add Mock Connection
     </Link>

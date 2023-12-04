@@ -37,6 +37,13 @@ export type Connection = {
   history?: HistoryEvent[]
 }
 
+export type EncryptedConnection = {
+  createdAt: string
+  encrypted: string
+  key: string
+  iv: string
+}
+
 export type HistoryEvent = {
   id: string
   userId: string
