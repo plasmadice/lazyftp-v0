@@ -6,6 +6,7 @@ import { Collapsible } from "@/components/ui/collapsible"
 import { Header } from "@/components/header"
 import { Aside } from "@/components/aside"
 import { Footer } from "@/components/footer"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -31,6 +32,7 @@ export default function RootLayout({
             <Aside />
 
             <main className="flex-grow bg-base-100 rounded-bl-lg p-4 overflow-auto">{children}</main>
+            <Toaster />
           </Collapsible>
           <Footer />
         </section>

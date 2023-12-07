@@ -12,4 +12,6 @@ const userKeyPrefix = baseKeyPrefix + defaultOptions.userKeyPrefix
 const verificationTokenKeyPrefix =
   baseKeyPrefix + defaultOptions.verificationTokenKeyPrefix
 
-export { baseKeyPrefix, accountKeyPrefix, accountByUserIdPrefix, emailKeyPrefix, sessionKeyPrefix, sessionByUserIdKeyPrefix, userKeyPrefix, verificationTokenKeyPrefix }
+const createdMetricsKey = [ "lazyftp", "metrics", "connections", "writes", ].join(":") 
+
+export { baseKeyPrefix, accountKeyPrefix, accountByUserIdPrefix, emailKeyPrefix, sessionKeyPrefix, sessionByUserIdKeyPrefix, userKeyPrefix, verificationTokenKeyPrefix, createdMetricsKey }

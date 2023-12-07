@@ -1,18 +1,15 @@
 import { describe, it, expect } from "@jest/globals";
-import { setConnection } from '@/util/db';
-import { mockFTPConnection } from '@/app/connections/ftp/MockFTP';
-import { Redis } from '@upstash/redis';
-
-const redis = Redis.fromEnv()
+import { setConnection, deleteConnection } from './db';
+import { mockFTPConnection } from '@/app/connections/new/MockFTP';
 
 const userId = crypto.randomUUID()
-const ftpId = crypto.randomUUID()
+const connectionId = crypto.randomUUID()
 
 describe('FTP functions', () => {
-  mockFTPConnection.id = ftpId;
+  mockFTPConnection.id = connectionId;
   it('sets an FTP session', async () => {
     let res = await setConnection(userId, mockFTPConnection);
-    // expect(redis.hset).toHaveBeenCalledWith('ftp:' + userId, ftpId, JSON.stringify(ftp));
+    expect(res).toBeInstanceOf(String);
     // expect(redis.sadd).toHaveBeenCalledWith('connections:' + userId, ftpId);
   });
 

@@ -39,34 +39,5 @@ export const deleteConnection = async (userId: string, createdAt: number) => {
   if (error) {
     console.error('Error when deleting connection from database:', error)
   }
+  return error
 }
-
-// export const getFTP = async (userId: string, key: string) => {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/ftp`, {
-//     method: "GET",
-//     body: JSON.stringify({ userId, key }),
-//   })
-
-//   const { encrypted, iv, error } = await res.json()
-
-//   if (error) {
-//     console.error('error in MockFTP.tsx', error)
-//   }
-
-//   return { encrypted, iv }
-// }
-
-// export const getAllFTP = async (userId: string) => {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/ftp`, {
-//     method: "GET",
-//     body: JSON.stringify({ userId }),
-//   })
-
-//   const { ftp, error } = await res.json()
-
-//   if (error) {
-//     console.error('error in MockFTP.tsx', error)
-//   }
-
-//   return ftp
-// }

@@ -21,8 +21,8 @@ export default function MockFTP({ userId }: { userId: string }) {
 
   return (
     <Link
+      className="link link-hover link-primary mx-4"
       href="#"
-      className="link link-secondary ml-4"
       onClick={() => {
         const now = Date.now()
         mockFTPConnection.createdAt = now
@@ -30,7 +30,7 @@ export default function MockFTP({ userId }: { userId: string }) {
         return setConnection(userId, mockFTPConnection)
       }}
     >
-      Add Mock Connection
+      Add Mock FTP
     </Link>
   )
 }

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Redis } from "@upstash/redis"
 import { userKeyPrefix } from "@/util/keys"
-import type { EncryptedConnection } from "@/types"
+
+const redis = Redis.fromEnv()
 
 type PostRequest = {
   userId: string
@@ -12,7 +13,6 @@ type PostRequest = {
   iv: string
 }
 
-const redis = Redis.fromEnv()
 
 export async function POST(
   req: NextRequest,
@@ -123,12 +123,12 @@ export async function GET(
 export async function DELETE(
   req: NextRequest,
 ) {
-  const { userId, createdAt }= await req.json()
+  const { userId, createdAt: score } = await req.json()
 
-  if (!userId || !createdAt) {
+  if (!userId || !score) {
     return NextResponse.json(
       {
-        error: "userId and createdAt are required to delete a connection",
+        error: "userId and score are required to delete a connection",
         description: `Error while deleting connection`,
       },
       { status: 400 }
@@ -138,7 +138,7 @@ export async function DELETE(
   // lazyftp:user:[userID]:connections
   const userPoolKey = userKeyPrefix + userId + ":connections"
 
-  const res = await redis.zremrangebyscore(userPoolKey, createdAt, createdAt)
+  const res = await redis.zremrangebyscore(userPoolKey, score, score)
 
   if (!res || res === 0) {
     return NextResponse.json({ error: "Connection not found" }, { status: 404 })

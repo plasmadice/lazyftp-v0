@@ -46,9 +46,10 @@ export type EncryptedConnection = {
 
 export type HistoryEvent = {
   id: string
+  connectionId: string
   userId: string
   timestamp: number
-  command: string
-  args: string[]
-  path: string
+  args?: string[]
+  command?: string
+  path?: string
 }

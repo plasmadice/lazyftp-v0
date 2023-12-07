@@ -13,16 +13,16 @@ export function ConnectionItem({ userId, connection }: { userId: string, connect
   const latestPath = history && history[0] ? history[0].path : "/path/to/loot"
 
   return (
-    <div className="flex justify-between items-start">
+    <div className="p-4 flex justify-between items-start odd:bg-base-300 rounded-lg">
       <div>
         <div className="font-medium truncate">{name}</div>
         <div className="flex flex-col gap-2">
-          <div className="text-sm text-zinc-600 dark:text-zinc-500 truncate">
-            {createdAt}
+          <div className="text-sm font-thin truncate">
+            Created: {new Date(createdAt).toLocaleString()}
           </div>
-          <div className="text-sm text-zinc-500 dark:text-zinc-400 truncate">
+          <div className="text-sm truncate">
             Type: { type },
-            Last accessed: {lastAccessed && new Date(lastAccessed).toLocaleDateString()}, Last
+            Last accessed: {lastAccessed && new Date(lastAccessed).toLocaleString()}, Last
             connected path: {latestPath}
           </div>
         </div>
