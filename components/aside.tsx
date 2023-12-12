@@ -10,7 +10,7 @@ export function Aside() {
   return (
     <>
       {/* hide CollapsibleContent tag with className ex: lg:open */}
-      <CollapsibleContent className="w-64 flex-shrink-0 bg-base-300 lg:open rounded-br-lg text-base-content">
+      <CollapsibleContent className="w-64 flex-shrink-0 bg-base-300 rounded-br-lg text-base-content">
         <Collapsible
         >
           <CollapsibleTrigger asChild>

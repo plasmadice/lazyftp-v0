@@ -40,7 +40,7 @@ export default async function page() {
     return <p>No session</p>
   } else {
     return (
-      <div className="overflow-hidden">
+      <div className="overflow-auto">
         <div className="flex flex-row justify-between items-center">
           <div className="font-medium text-base-content">
             Connections for user {session.user.id}
@@ -50,10 +50,10 @@ export default async function page() {
           </div>
         </div>
         <Link
-          href="/connections/new"
+          href="/connections/edit"
           className="link link-hover link-secondary"
         >
-          Add New FTP
+          Add New Connection
         </Link>
         <MockFTP userId={session.user.id} />
         {connections.length > 0 && (

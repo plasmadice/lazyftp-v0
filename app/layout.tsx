@@ -26,7 +26,7 @@ export default function RootLayout({
         <section className="min-h-screen max-h-screen flex flex-col bg-accent">
           <Header />
           <Collapsible
-            defaultOpen
+            // defaultOpen
             className="flex-grow flex overflow-hidden min-h-full"
           >
             <Aside />

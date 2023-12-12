@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { deleteConnection } from "@/util/db"
 import { useRouter } from "next/navigation"
-import { toast, useToast } from "@/components/ui/use-toast"
+import { toast } from "@/components/ui/use-toast"
 
 export const ConnectionButtons = ({
   userId,
@@ -18,16 +18,23 @@ export const ConnectionButtons = ({
       <Button
         size="sm"
         variant="outline"
-        className="bg-primary text-primary-content border-primary-content hover:bg-secondary text-md"
+        className="hover:bg-primary hover:text-primary-content hover:border-primary-content font-semibold text-md"
       >
         Connect
       </Button>
       <Button
         size="sm"
         variant="outline"
-        className="hover:bg-primary hover:text-primary-content hover:border-primary-content text-md"
+        className="hover:bg-secondary hover:text-secondary-content hover:border-secondary-content font-semibold text-md"
       >
         Continue
+      </Button>
+      <Button
+        size="sm"
+        variant="outline"
+        className="hover:bg-accent hover:text-accent-content hover:border-accent-content font-semibold text-md"
+      >
+        Edit
       </Button>
       <Button
         onClick={() => {
@@ -37,7 +44,7 @@ export const ConnectionButtons = ({
         }}
         size="sm"
         variant="outline"
-        className="bg-error text-error-content border-error-content font-semibold text-md"
+        className="hover:bg-error hover:text-error-content hover:border-error-content font-semibold text-md"
       >
         Delete
       </Button>

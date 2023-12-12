@@ -8,7 +8,7 @@ import {
 export function Footer() {
   return (
     <Collapsible
-      defaultOpen
+      // defaultOpen
       className="bg-base-300 text-base-content"
     >
       <CollapsibleTrigger asChild>
